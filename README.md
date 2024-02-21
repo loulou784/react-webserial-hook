@@ -1,4 +1,6 @@
-# @mniota/react-webserial-hook
+Modified to expose WebSerial reader directly
+
+# Fork from @mniota/react-webserial-hook
 
 > A React Hook for WebSerial API
 

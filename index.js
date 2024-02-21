@@ -151,15 +151,6 @@ export function useWebSerial({ onConnect, onDisconnect, onData }) {
   }
 
   useEffect(() => {
-    navigator.serial.addEventListener("connect", _onConnect)
-    navigator.serial.addEventListener("disconnect", _onDisconnect)
-    return () => {
-      navigator.serial.removeEventListener("connect", _onConnect)
-      navigator.serial.removeEventListener("disconnect", _onDisconnect)
-    }
-  })
-
-  useEffect(() => {
     if (webSerialContext.initialized) {
       return;
     }
@@ -221,6 +212,9 @@ export function useWebSerial({ onConnect, onDisconnect, onData }) {
       stopBits,
     });
 
+    navigator.serial.addEventListener("connect", _onConnect)
+    navigator.serial.addEventListener("disconnect", _onDisconnect)
+
     setIsOpen(true);
   };
 
@@ -238,6 +232,9 @@ export function useWebSerial({ onConnect, onDisconnect, onData }) {
     }
 
     await port.close();
+
+    navigator.serial.removeEventListener("connect", _onConnect)
+    navigator.serial.removeEventListener("disconnect", _onDisconnect)
 
     setIsOpen(false);
   };
