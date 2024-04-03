@@ -38,6 +38,7 @@ function useInterval(callback, delay) {
  */
 export function useWebSerial({ onConnect, onDisconnect, onData }) {
   if (!navigator.serial) {
+    return
     throw Error("WebSerial is not available")
   }
 
